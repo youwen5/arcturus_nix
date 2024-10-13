@@ -31,7 +31,7 @@ chmod +x ./install.sh
 . run.sh module_name node.py
 ```
 
-4. Make sure you run the above command (and any other commands related to running and buildings nodes) from a Nix devshell (i.e. run `nix develop` prior to running any of these commands). Cloning this repository and updating dependencies are exceptions to this rule (see below).
+4. Make sure you run the above command (and any other commands related to running and building nodes) from a Nix devshell (i.e. run `nix develop` prior to running any of these commands). Cloning this repository and updating dependencies are exceptions to this rule (see below).
 5. To update your local environment, run this from the `arcturus_nix` directory:
 
 ```bash
