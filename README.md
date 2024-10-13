@@ -65,7 +65,7 @@ As of right now, the most reproducible setup might still be to use the Docker co
 As of right now, this setup does not offer a huge advantage over Docker, but it does have some minor benefits.
 Most notably, you don't have to deal with the virtualization (and jank) of Docker (you might even be able to use your GPU!), so builds should be (slightly) faster.
 You also get the elegance of Nix, which makes it clear what packages you need as dependencies and what versions of those packages you need, for each module and for the system as a whole.
-Nix does this in a much better and more reproducible way than ROS, but currently due to the devshell setup, it is impossible to determine whether all necessary packages are included in the Nix environment.
+Nix does this in a much better and more reproducible way than ROS, but, currently, due to the devshell setup, it is impossible to determine whether all necessary packages are included in the Nix environment.
 
 ### What is and isn't supported?
 
