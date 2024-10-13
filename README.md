@@ -4,7 +4,8 @@ The easiest way to get started with development on all_seaing_vehicle with nativ
 
 ## Getting up and running (in less than a minute)
 
-**Important:** See [what is and isn't supported](#what-is-and-isnt-supported) for more information.
+> [!IMPORTANT]
+> See [what is and isn't supported](#what-is-and-isnt-supported) for more information.
 
 Run the following in a Bash shell on an x86-64 Linux system to build individual Python nodes (simulations and nodes requiring YOLO models will not work).
 Use this if you want to be on the bleeding edge of development, build code fast and cut through bloat, and get a taste of [NixOS god complex](https://www.reddit.com/r/NixOS/comments/kauf1m/dealing_with_post_nixflake_god_complex/).
