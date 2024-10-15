@@ -20,6 +20,7 @@ You can [run from Nix](https://github.com/ArcturusNavigation/arcturus_docker), b
 ```bash
 git clone https://github.com/ArcturusNavigation/arcturus_nix
 cd arcturus_nix
+git checkout janky
 nix develop
 chmod +x ./install.sh
 ./install.sh
