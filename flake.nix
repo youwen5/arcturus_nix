@@ -62,6 +62,10 @@
                   rviz-satellite
                   rviz-default-plugins
                   rosbag2-py
+
+                  # for simulation
+                  gazebo-ros
+
                   # add other ROS packages here
                 ];
               }

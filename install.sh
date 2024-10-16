@@ -11,6 +11,10 @@ echo -e "\e[1mCreating a workspace for all_seaing_vehicle and dependencies in de
 echo "====="
 mkdir -p ./dev_ws/src
 cd ./dev_ws/src
+echo -e "\e[1mCreating a workspace for simulator and dependencies in vrx_ws/src\e[0m"
+echo "====="
+mkdir -p ./vrx_ws/src
+cd ./vrx_ws/src
 echo -e "\e[1mDone creating workspaces.\e[0m"
 
 # clone all_seaing_vehicle
@@ -18,6 +22,12 @@ echo -e "\e[1mCloning all_seaing_vehicle\e[0m"
 echo "====="
 git clone https://github.com/ArcturusNavigation/all_seaing_vehicle
 echo -e "Done cloning all_seaing_vehicle."
+
+# clone vrx
+echo -e "\e[1mCloning vrx\e[0m"
+echo "====="
+git clone https://github.com/ArcturusNavigation/vrx
+echo -e "Done cloning vrx."
 
 # clone local dependencies
 
