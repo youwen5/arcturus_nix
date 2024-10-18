@@ -3,7 +3,7 @@
 The easiest way to get started with development on all_seaing_vehicle with native performance, powered by the Nix package manager
 
 > [!NOTE]
-> This branch is intended to address #5 and #1 to turn the proof-of-concept Nix build system into a superjank reality.
+> This branch is intended to address https://github.com/ArcturusNavigation/arcturus_nix/issues/5 and https://github.com/ArcturusNavigation/arcturus_nix/issues/1 to turn the proof-of-concept Nix build system into a superjank reality.
 
 ## Getting up and running (in less than a minute)
 
