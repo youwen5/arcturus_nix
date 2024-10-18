@@ -10,37 +10,14 @@
 echo -e "\e[1mCreating a workspace for all_seaing_vehicle and dependencies in dev_ws/src\e[0m"
 echo "====="
 mkdir -p ./dev_ws/src
-cd ./dev_ws/src
-echo -e "\e[1mCreating a workspace for simulator and dependencies in vrx_ws/src\e[0m"
-echo "====="
-mkdir -p ./vrx_ws/src
-cd ./vrx_ws/src
 echo -e "\e[1mDone creating workspaces.\e[0m"
 
 # clone all_seaing_vehicle
 echo -e "\e[1mCloning all_seaing_vehicle\e[0m"
 echo "====="
+cd ./dev_ws/src
 git clone https://github.com/ArcturusNavigation/all_seaing_vehicle
 echo -e "Done cloning all_seaing_vehicle."
-
-# clone vrx
-echo -e "\e[1mCloning vrx\e[0m"
-echo "====="
-git clone https://github.com/ArcturusNavigation/vrx
-echo -e "Done cloning vrx."
-
-# clone local dependencies
-
-# echo -e "\e[1mCloning local dependencies alongside all_seaing_vehicle\e[0m"
-# use v3.9.1 (latest stable version) of robot_localization
-# echo -e "\e[1mCloning robot_localization (v3.9.1)\e[0m"
-# echo "====="
-# git clone --depth 1 https://github.com/cra-ros-pkg/robot_localization
-# cd robot_localization
-# git fetch --depth 1 origin 7b911bb19ca1fbbbdf0532260b4ca1359fbfcfac > /dev/null 2>&1
-# git checkout 7b911bb19ca1fbbbdf0532260b4ca1359fbfcfac > /dev/null 2>&1
-# cd ..
-# echo -e "Done cloning robot_localization."
 
 # use latest commit (no version tag) of ros2-keyboard
 echo -e "\e[1mCloning ros2-keyboard (f1d8412)\e[0m"

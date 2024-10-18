@@ -66,6 +66,9 @@
                   # for simulation
                   gazebo-ros
 
+                  # for launch
+                  robot-localization
+
                   # add other ROS packages here
                 ];
               }
