@@ -17,6 +17,9 @@ echo -e "\e[1mCloning all_seaing_vehicle\e[0m"
 echo "====="
 cd ./dev_ws/src
 git clone https://github.com/ArcturusNavigation/all_seaing_vehicle
+cd all_seaing_vehicle
+git checkout q9i/nix-launch
+cd ..
 echo -e "Done cloning all_seaing_vehicle."
 
 # use latest commit (no version tag) of ros2-keyboard

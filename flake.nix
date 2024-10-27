@@ -4,7 +4,7 @@
 
     # important for ros overlay to work
     nixpkgs.follows = "nix-ros-overlay/nixpkgs";
-    nix-ros-overlay.url = "github:lopsided98/nix-ros-overlay/master";
+    nix-ros-overlay.url = "github:arcturusnavigation/nix-ros-overlay/develop";
   };
   outputs =
     {
@@ -63,11 +63,13 @@
                   rviz-default-plugins
                   rosbag2-py
 
-                  # for simulation
-                  gazebo-ros
+                  # for simulation (requires insecure packages)
+                  # gazebo-ros
 
                   # for launch
+                  mavros
                   robot-localization
+                  velodyne-pointcloud
 
                   # add other ROS packages here
                 ];

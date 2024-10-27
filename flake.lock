@@ -19,11 +19,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1705309234,
-        "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
+        "lastModified": 1726560853,
+        "narHash": "sha256-X6rJYSESBVr3hBoH0WbKE5KvhPU5bloyZ2L4K60/fPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
+        "rev": "c1dfcf08411b08f6b8615f7d8971a2bfa81d5e8a",
         "type": "github"
       },
       "original": {
@@ -74,16 +74,16 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1712797796,
-        "narHash": "sha256-SkCWsnJ6H+LbXt7PLroXCPlb0k52+EG7WKEXtWjuNbI=",
-        "owner": "lopsided98",
+        "lastModified": 1730060126,
+        "narHash": "sha256-waIE38wCg6D5yw6aubZhHYMZhB5dD5/0B1xL2V52iXM=",
+        "owner": "arcturusnavigation",
         "repo": "nix-ros-overlay",
-        "rev": "e239e71fd2ce40ce1f7499328a4c92e9473fec88",
+        "rev": "14ff69a59a277cbd013a111247d17a23f261e5d6",
         "type": "github"
       },
       "original": {
-        "owner": "lopsided98",
-        "ref": "master",
+        "owner": "arcturusnavigation",
+        "ref": "develop",
         "repo": "nix-ros-overlay",
         "type": "github"
       }
@@ -113,11 +113,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1707268954,
-        "narHash": "sha256-2en1kvde3cJVc3ZnTy8QeD2oKcseLFjYPLKhIGDanQ0=",
+        "lastModified": 1726243404,
+        "narHash": "sha256-sjiGsMh+1cWXb53Tecsm4skyFNag33GPbVgCdfj3n9I=",
         "owner": "lopsided98",
         "repo": "nixpkgs",
-        "rev": "f8e2ebd66d097614d51a56a755450d4ae1632df1",
+        "rev": "345c263f2f53a3710abe117f28a5cb86d0ba4059",
         "type": "github"
       },
       "original": {
