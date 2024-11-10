@@ -24,6 +24,7 @@
       {
         devShells.default = pkgs.mkShell {
           name = "Arcturus";
+          LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
           packages = [
             pkgs.git
             pkgs.bash
