@@ -23,7 +23,7 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          name = "Arcturus (tiny)";
+          name = "arcturus-tiny";
           LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
           packages = [
             pkgs.git
