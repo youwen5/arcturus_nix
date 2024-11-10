@@ -34,6 +34,7 @@
             pkgs.python3Packages.transforms3d
             pkgs.python3Packages.torch
             pkgs.SDL
+            pkgs.yaml-cpp
             ros2nix.packages.${pkgs.system}.ros2nix
             # add other non-ROS packages here
             (
