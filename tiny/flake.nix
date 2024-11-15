@@ -34,6 +34,7 @@
             pkgs.python3Packages.scipy
             pkgs.python3Packages.transforms3d
             pkgs.python3Packages.torch
+            pkgs.python3Packages.pyserial
             pkgs.SDL
             pkgs.yaml-cpp
             ros2nix.packages.${pkgs.system}.ros2nix
