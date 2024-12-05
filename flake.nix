@@ -7,14 +7,17 @@
     nix-ros-overlay.url = "github:arcturusnavigation/nix-ros-overlay/develop";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    devenv.url = "github:cachix/devenv";
   };
   outputs =
     inputs@{
-      ros2nix,
       flake-parts,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.devenv.flakeModule
+      ];
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -31,63 +34,69 @@
             ];
           };
 
-          devShells.default = pkgs.mkShell {
+          devenv.shells.default = {
             name = "arcturus";
-            LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
-            packages = [
-              pkgs.git
-              pkgs.bash
-              pkgs.colcon
-              pkgs.geographiclib
-              pkgs.python3Packages.rosdep
-              pkgs.python3Packages.scipy
-              pkgs.python3Packages.transforms3d
-              pkgs.python3Packages.torch
-              pkgs.python3Packages.pyserial
-              pkgs.SDL
-              pkgs.yaml-cpp
-              ros2nix.packages.${pkgs.system}.ros2nix
-              # add other non-ROS packages here
-              (
-                with pkgs.rosPackages.humble;
-                buildEnv {
-                  paths = [
-                    ros-core
-                    boost
-                    ament-cmake-core
-                    angles
-                    diagnostic-updater
-                    geographic-msgs
-                    message-filters
-                    tf-transformations
-                    tf2-ros-py
-                    tf2-eigen
-                    tf2-geometry-msgs
-                    yaml-cpp-vendor
-                    python-cmake-module
-                    rviz-common
-                    tf2-sensor-msgs
-                    mavros-msgs
-                    pcl-ros
-                    cv-bridge
-                    image-geometry
-                    rviz-satellite
-                    rviz-default-plugins
-                    rosbag2-py
+            # LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+            packages =
+              with pkgs;
+              [
+                # add other non-ROS packages here
+                git
+                bash
+                colcon
+                geographiclib
+                python3Packages.rosdep
+                python3Packages.scipy
+                python3Packages.transforms3d
+                python3Packages.torch
+                python3Packages.pyserial
+                SDL
+                yaml-cpp
+              ]
+              ++ [
+                inputs.ros2nix.packages.${pkgs.system}.ros2nix
+                (
+                  with pkgs.rosPackages.humble;
+                  buildEnv {
+                    paths = [
+                      ros-core
+                      boost
+                      ament-cmake-core
+                      angles
+                      diagnostic-updater
+                      geographic-msgs
+                      message-filters
+                      tf-transformations
+                      tf2-ros-py
+                      tf2-eigen
+                      tf2-geometry-msgs
+                      yaml-cpp-vendor
+                      python-cmake-module
+                      rviz-common
+                      tf2-sensor-msgs
+                      mavros-msgs
+                      pcl-ros
+                      cv-bridge
+                      image-geometry
+                      rviz-satellite
+                      rviz-default-plugins
+                      rosbag2-py
 
-                    # for simulation (requires insecure packages)
-                    # gazebo-ros
+                      # for simulation (requires insecure packages)
+                      # gazebo-ros
 
-                    # for launch
-                    mavros
-                    robot-localization
-                    velodyne-pointcloud
+                      # for launch
+                      mavros
+                      robot-localization
+                      velodyne-pointcloud
 
-                    # add other ROS packages here
-                  ];
-                }
-              )
-            ];
+                      # add other ROS packages here
+                    ];
+                  }
+                )
+              ];
+
+            scripts = import ./nix/scripts.nix;
           };
           formatter = pkgs.nixfmt-rfc-style;
         };

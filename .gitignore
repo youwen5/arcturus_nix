@@ -8,3 +8,7 @@ result-*
 
 # Ignore workspaces
 *_ws
+
+# ignore .devenv and .direnv
+.devenv
+.direnv
