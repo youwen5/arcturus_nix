@@ -2,6 +2,12 @@
 
 The easiest way to get started with development on all_seaing_vehicle with native performance, powered by the Nix package manager
 
+## A quick introduction
+
+![Ubuntu and Red Hat Users Guild: We've got you surrounded! Come use containers! Me, a Nix intellectual: I HATE DOCKER! I HATE DOCKER!](./assets/containers.jpg)
+
+And so it begins…
+
 ## Getting up and running (in less than a minute)
 
 > [!IMPORTANT]
