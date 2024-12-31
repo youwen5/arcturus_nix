@@ -8,6 +8,70 @@ The easiest way to get started with development on all_seaing_vehicle with nativ
 
 And so it begins…
 
+## Technical overview
+
+```mermaid
+flowchart TB
+    subgraph Runtime
+        ROS2[ROS2 Nodes]:::runtime
+        Python[Python Runtime]:::runtime
+        ROS2 <--> Python
+    end
+
+    subgraph DevShell
+        Flake[Flake.nix]:::nix
+        Shell[Development Shell]:::nix
+        Flake --> Shell
+        Lock[flake.lock]:::nix
+        Flake --> Lock
+    end
+
+    subgraph Scripts
+        Install[install.sh]:::script
+        Run[run.sh]:::script
+        Source[source.sh]:::script
+    end
+
+    subgraph MinimalConfig
+        TinyFlake[Minimal Flake]:::nix
+        TinyLock[Minimal Lock]:::nix
+        TinyFlake --> TinyLock
+    end
+
+    subgraph Foundation
+        Nix[Nix Package Manager]:::nix
+    end
+
+    %% Relationships
+    Nix --> DevShell
+    DevShell --> Runtime
+    Scripts --> Runtime
+    MinimalConfig --> DevShell
+
+    %% Click Events
+    click Flake "https://github.com/arcturusnavigation/arcturus_nix/blob/main/flake.nix"
+    click Lock "https://github.com/arcturusnavigation/arcturus_nix/blob/main/flake.lock"
+    click Install "https://github.com/arcturusnavigation/arcturus_nix/blob/main/install.sh"
+    click Run "https://github.com/arcturusnavigation/arcturus_nix/blob/main/run.sh"
+    click Source "https://github.com/arcturusnavigation/arcturus_nix/blob/main/source.sh"
+    click TinyFlake "https://github.com/arcturusnavigation/arcturus_nix/blob/main/tiny/flake.nix"
+    click TinyLock "https://github.com/arcturusnavigation/arcturus_nix/blob/main/tiny/flake.lock"
+
+    %% Styling
+    classDef nix fill:#1d4ed8,color:white
+    classDef runtime fill:#15803d,color:white
+    classDef script fill:#ea580c,color:white
+
+    %% Legend
+    subgraph Legend
+        L1[Nix Components]:::nix
+        L2[Runtime Components]:::runtime
+        L3[Script Components]:::script
+    end
+```
+
+Generated with [GitDiagram](https://gitdiagram.com/arcturusnavigation/arcturus_nix).
+
 ## Getting up and running (in less than a minute)
 
 > [!IMPORTANT]
