@@ -26,9 +26,15 @@
           name = "arcturus";
           LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
           packages = [
+            # basic development tasks
             pkgs.git
             pkgs.bash
+
+            # ros build tools
             pkgs.colcon
+            ros2nix.packages.${pkgs.system}.ros2nix
+
+            # project system dependencies
             pkgs.geographiclib
             pkgs.python3Packages.rosdep
             pkgs.python3Packages.scipy
@@ -37,12 +43,13 @@
             pkgs.python3Packages.pyserial
             pkgs.SDL
             pkgs.yaml-cpp
-            ros2nix.packages.${pkgs.system}.ros2nix
-            # add other non-ROS packages here
+
+            # add other system packages here
             (
               with pkgs.rosPackages.humble;
               buildEnv {
                 paths = [
+                  # empirically determined list of project ROS dependencies
                   ros-core
                   boost
                   ament-cmake-core
