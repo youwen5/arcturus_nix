@@ -12,61 +12,83 @@ And so it begins…
 
 ```mermaid
 flowchart TB
-    subgraph Runtime
-        ROS2[ROS2 Nodes]:::runtime
-        Python[Python Runtime]:::runtime
-        ROS2 <--> Python
-    end
+    %% Styles and classes
+    classDef foundation fill:#b3d1ff,stroke:#333
+    classDef build fill:#ffcccc,stroke:#333
+    classDef runtime fill:#d9f2d9,stroke:#333
+    classDef config fill:#ffe6cc,stroke:#333
+    classDef script fill:#e6ccff,stroke:#333
+    classDef doc fill:#f2f2f2,stroke:#333
 
-    subgraph DevShell
-        Flake[Flake.nix]:::nix
-        Shell[Development Shell]:::nix
-        Flake --> Shell
-        Lock[flake.lock]:::nix
-        Flake --> Lock
-    end
-
-    subgraph Scripts
-        Install[install.sh]:::script
-        Run[run.sh]:::script
-        Source[source.sh]:::script
-    end
-
-    subgraph MinimalConfig
-        TinyFlake[Minimal Flake]:::nix
-        TinyLock[Minimal Lock]:::nix
-        TinyFlake --> TinyLock
-    end
-
+    %% Foundation Layer
     subgraph Foundation
-        Nix[Nix Package Manager]:::nix
+        NixPM["Nix Package Manager"]:::foundation
+    end
+
+    %% Build Infrastructure Layer
+    subgraph BuildInfra["Build Infrastructure"]
+        FlakeNix["flake.nix"]:::config
+        FlakeLock["flake.lock"]:::config
+        BuildSh["build.sh"]:::script
+        InstallSh["install.sh"]:::script
+        PullSh["pull.sh"]:::script
+        UpdateSh["update.sh"]:::script
+        HashSh["hash.sh"]:::script
+        EnvRC[".envrc"]:::config
+    end
+
+    %% Runtime Environment Layer
+    subgraph Runtime["Runtime Environment"]
+        ROS2["ROS2 Runtime"]:::runtime
+        Python["Python Environment"]:::runtime
+        LaunchSh["launch.sh"]:::script
+        RunSh["run.sh"]:::script
+    end
+
+    %% Documentation
+    subgraph Docs["Documentation"]
+        ReadMe["README.md"]:::doc
+        Assets["Assets"]:::doc
     end
 
     %% Relationships
-    Nix --> DevShell
-    DevShell --> Runtime
-    Scripts --> Runtime
-    MinimalConfig --> DevShell
+    NixPM --> FlakeNix
+    NixPM --> FlakeLock
+    FlakeNix --> BuildSh
+    FlakeLock --> BuildSh
+    InstallSh --> PullSh
+    PullSh --> BuildSh
+    BuildSh --> ROS2
+    BuildSh --> Python
+    EnvRC --> ROS2
+    EnvRC --> Python
+    UpdateSh --> FlakeLock
+    HashSh --> BuildSh
+    ROS2 --> LaunchSh
+    Python --> RunSh
 
-    %% Click Events
-    click Flake "https://github.com/arcturusnavigation/arcturus_nix/blob/main/flake.nix"
-    click Lock "https://github.com/arcturusnavigation/arcturus_nix/blob/main/flake.lock"
-    click Install "https://github.com/arcturusnavigation/arcturus_nix/blob/main/install.sh"
-    click Run "https://github.com/arcturusnavigation/arcturus_nix/blob/main/run.sh"
-    click Source "https://github.com/arcturusnavigation/arcturus_nix/blob/main/source.sh"
-    click TinyFlake "https://github.com/arcturusnavigation/arcturus_nix/blob/main/tiny/flake.nix"
-    click TinyLock "https://github.com/arcturusnavigation/arcturus_nix/blob/main/tiny/flake.lock"
-
-    %% Styling
-    classDef nix fill:#1d4ed8,color:white
-    classDef runtime fill:#15803d,color:white
-    classDef script fill:#ea580c,color:white
+    %% Click events
+    click FlakeNix "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/flake.nix"
+    click FlakeLock "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/flake.lock"
+    click BuildSh "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/build.sh"
+    click InstallSh "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/install.sh"
+    click PullSh "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/pull.sh"
+    click UpdateSh "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/update.sh"
+    click HashSh "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/hash.sh"
+    click EnvRC "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/.envrc"
+    click LaunchSh "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/launch.sh"
+    click RunSh "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/run.sh"
+    click ReadMe "https://github.com/ArcturusNavigation/arcturus_nix/blob/main/README.md"
+    click Assets "https://github.com/ArcturusNavigation/arcturus_nix/tree/main/assets/"
 
     %% Legend
     subgraph Legend
-        L1[Nix Components]:::nix
-        L2[Runtime Components]:::runtime
-        L3[Script Components]:::script
+        L1["Foundation Component"]:::foundation
+        L2["Build Component"]:::build
+        L3["Runtime Component"]:::runtime
+        L4["Configuration File"]:::config
+        L5["Script"]:::script
+        L6["Documentation"]:::doc
     end
 ```
 
