@@ -5,6 +5,9 @@
     # important for ros overlay to work
     nixpkgs.follows = "nix-ros-overlay/nixpkgs";
     nix-ros-overlay.url = "github:arcturusnavigation/nix-ros-overlay/develop";
+
+    # for development
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
   outputs =
     {
@@ -12,6 +15,7 @@
       nix-ros-overlay,
       ros2nix,
       nixpkgs,
+      pre-commit-hooks,
     }:
     nix-ros-overlay.inputs.flake-utils.lib.eachDefaultSystem (
       system:
@@ -87,6 +91,31 @@
             )
           ];
         };
+
+        checks = {
+          pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              nixfmt-rfc-style.enable = true;
+              shfmt.enable = true;
+              markdownlint.enable = true;
+            };
+          };
+        };
+
+        devShells.dev = pkgs.mkShell {
+          name = "development";
+
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+          buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
+
+          packages = [
+            # basic development tasks
+            pkgs.git
+            pkgs.bash
+          ];
+        };
+
         formatter = pkgs.nixfmt-rfc-style;
       }
     );

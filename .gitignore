@@ -1,10 +1,15 @@
-# From https://github.com/github/gitignore/blob/main/community/Nix.gitignore
-
+# Nix >>>
 # Ignore build outputs from performing a nix-build or `nix build` command
 result
 result-*
 
-# Additional
+# Ignore automatically generated direnv output
+.direnv
 
+# Ignore pre-commit hooks
+.pre-commit-config.yaml
+
+
+# Project >>>
 # Ignore workspaces
 *_ws

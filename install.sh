@@ -27,8 +27,8 @@ echo -e "\e[1mCloning ros2-keyboard (f1d8412)\e[0m"
 echo "====="
 git clone --depth 1 https://github.com/cmower/ros2-keyboard
 cd ros2-keyboard
-git fetch --depth 1 origin f1d84122b40cbeec05d54ce90d35c8d16b47bbad > /dev/null 2>&1
-git checkout f1d84122b40cbeec05d54ce90d35c8d16b47bbad > /dev/null 2>&1
+git fetch --depth 1 origin f1d84122b40cbeec05d54ce90d35c8d16b47bbad >/dev/null 2>&1
+git checkout f1d84122b40cbeec05d54ce90d35c8d16b47bbad >/dev/null 2>&1
 cd ..
 echo -e "Done cloning ros2-keyboard."
 
