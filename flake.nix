@@ -8,6 +8,16 @@
 
     # for development
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+
+    arcturus-tree = {
+      url = "github:ArcturusNavigation/all_seaing_vehicle/q9i/nix-launch";
+      flake = false;
+    };
+
+    ros2-keyboard = {
+      url = "github:cmower/ros2-keyboard";
+      flake = false;
+    };
   };
   outputs =
     {
@@ -16,6 +26,8 @@
       ros2nix,
       nixpkgs,
       pre-commit-hooks,
+      arcturus-tree,
+      ros2-keyboard,
     }:
     nix-ros-overlay.inputs.flake-utils.lib.eachDefaultSystem (
       system:
@@ -127,6 +139,14 @@
         };
 
         formatter = pkgs.nixfmt-rfc-style;
+
+        packages = {
+          default = pkgs.callPackage ./bin {
+            inherit arcturus-tree ros2-keyboard;
+            inherit (ros2nix.packages.${pkgs.stdenv.targetPlatform.system}) ros2nix;
+            rev = if (self ? rev) then self.rev else "unstable";
+          };
+        };
       }
     );
   nixConfig = {
