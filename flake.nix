@@ -90,6 +90,16 @@
               }
             )
           ];
+
+          shellHook = ''
+            alias install="./install.sh"
+            alias pull="./pull.sh"
+            alias build="./build.sh"
+            alias update="./update.sh"
+            alias run=". ./run.sh"
+            alias launch="./launch.sh"
+            alias hash="./hash.sh"
+          '';
         };
 
         checks = {
