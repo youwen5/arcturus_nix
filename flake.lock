@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "arcturus-tree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736713641,
+        "narHash": "sha256-8gT1YuF3cXhTaHXrahYQMcdamV/wi7+TNoftzWM9E5g=",
+        "owner": "ArcturusNavigation",
+        "repo": "all_seaing_vehicle",
+        "rev": "e16e44c8a35bdaa9a0468624e0cc4b2b5fd377fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ArcturusNavigation",
+        "ref": "q9i/nix-launch",
+        "repo": "all_seaing_vehicle",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -218,13 +235,31 @@
     },
     "root": {
       "inputs": {
+        "arcturus-tree": "arcturus-tree",
         "nix-ros-overlay": "nix-ros-overlay",
         "nixpkgs": [
           "nix-ros-overlay",
           "nixpkgs"
         ],
         "pre-commit-hooks": "pre-commit-hooks",
+        "ros2-keyboard": "ros2-keyboard",
         "ros2nix": "ros2nix"
+      }
+    },
+    "ros2-keyboard": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1725801693,
+        "narHash": "sha256-xgPr7tsho48emUh0ggb1P84lEHm8tt+Byo8xlprYUVQ=",
+        "owner": "cmower",
+        "repo": "ros2-keyboard",
+        "rev": "f1d84122b40cbeec05d54ce90d35c8d16b47bbad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cmower",
+        "repo": "ros2-keyboard",
+        "type": "github"
       }
     },
     "ros2nix": {
