@@ -1,6 +1,8 @@
-# $ nix develop
-# <devshell> $ ./build.sh
+#!/usr/bin/env -S nix develop .#dev --command bash
 
+# IMPORTANT: This script MUST be run from somewhere within the arcturus_nix
+# project directory, or it will not work!
+#
 # Run this script after `pull.sh` (in this directory) from inside a Nix development shell.
 # It will build the relevant Nix package manifests.
 # You can run this again to rebuild Nix packages if dependencies change, e.g.
