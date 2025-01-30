@@ -133,11 +133,12 @@ stdenvNoCC.mkDerivation {
     ''
       mkdir -p $out/bin
     ''
-    + builtins.concatStringsSep "\n" (builtins.map (x: "ln -s ${x.value} $out/bin/${x.name}") scripts);
+    + builtins.concatStringsSep "\n" (
+      builtins.map (x: "ln -s ${x.value} $out/bin/arcturus-${x.name}") scripts
+    );
 
   meta = {
     maintainers = [ lib.maintainers.youwen5 ];
     platforms = lib.platforms.linux;
-    mainProgram = "install";
   };
 }
