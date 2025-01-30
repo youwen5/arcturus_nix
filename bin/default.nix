@@ -92,6 +92,18 @@ let
 
     '';
 
+    get-versions = writeShellScript "get-versions.sh" ''
+      echo -e "\e[1mgithub:ArcturusNavigation/arcturus_nix\e[0m"
+      if [ "${rev}" == 'unstable' ]; then
+        echo 'your working tree is dirty, you have uncommitted changes.'
+      else
+        echo 'commit: ${rev}'
+      fi
+
+      echo -e "\n\e[1mgithub:ArcturusNavigation/all_seaing_vehicle\e[0m"
+      echo 'commit: ${arcturus-tree.rev}'
+    '';
+
     # Run this script initially (in this directory) from inside a Nix development shell.
     # It will create a workspace `dev_ws` in the current directory.
     # Only run this script once and use `. ./run.sh` after.
