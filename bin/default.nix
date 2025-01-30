@@ -1,11 +1,8 @@
 {
   # nix support
   stdenvNoCC,
-  stdenv,
-  buildFHSEnv,
   writeShellScript,
   lib,
-  env,
 
   # git commit of self (will be "unstable" if working tree dirty)
   rev,
