@@ -62,14 +62,16 @@ let
       echo -e "\e[1mUse \`./build.sh\` before running your first node.\e[0m"
     '';
 
+    build = "${env}/bin/arcturus-builder";
+
     # Run this script initially (in this directory) from inside a Nix development shell.
     # It will create a workspace `dev_ws` in the current directory.
     # Only run this script once and use `. ./run.sh` after.
     # Dependencies will intentionally not be updated to ensure reproducibility.
-    # install = writeShellScript "install.sh" ''
-    #   ${pull}
-    #   ${build}
-    # '';
+    install = writeShellScript "install.sh" ''
+      ${pull}
+      ${build}
+    '';
   };
 in
 stdenvNoCC.mkDerivation {

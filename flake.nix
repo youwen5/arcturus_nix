@@ -140,12 +140,93 @@
 
         formatter = pkgs.nixfmt-rfc-style;
 
-        packages = {
+        packages = rec {
           default = pkgs.callPackage ./bin {
-            inherit arcturus-tree ros2-keyboard;
+            inherit arcturus-tree ros2-keyboard env;
             inherit (ros2nix.packages.${pkgs.stdenv.targetPlatform.system}) ros2nix;
             rev = if (self ? rev) then self.rev else "unstable";
+
           };
+          env = (
+            with pkgs.rosPackages.humble;
+            (buildEnv {
+              paths = [
+                # empirically determined list of project ROS dependencies
+                ros-core
+                boost
+                ament-cmake-core
+                angles
+                diagnostic-updater
+                geographic-msgs
+                message-filters
+                tf-transformations
+                tf2-ros-py
+                tf2-eigen
+                tf2-geometry-msgs
+                yaml-cpp-vendor
+                python-cmake-module
+                rviz-common
+                tf2-sensor-msgs
+                mavros-msgs
+                pcl-ros
+                cv-bridge
+                image-geometry
+                rviz-satellite
+                rviz-default-plugins
+                rosbag2-py
+
+                # for simulation (requires insecure packages)
+                # gazebo-ros
+
+                # for launch
+                mavros
+                robot-localization
+                velodyne-pointcloud
+
+                # add other ROS packages here
+              ];
+            }).overrideAttrs
+              (prev: {
+                buildPhase =
+                  prev.buildPhase
+                  + ''
+                    cat << EOF > build.sh
+
+                    # generate package manifests
+                    echo -e "\e[1mGenerating Nix packages for all_seaing_vehicle and dependencies with ros2nix\e[0m"
+                    echo "====="
+                    cd dev_ws
+                    ${ros2nix}/bin/ros2nix -- \$(find -name package.xml)
+                    echo -e "Done generating Nix packages."
+
+                    # create build artifacts
+                    echo -e "\e[1mGenerating build artifacts and symlinks for ROS.\e[0m"
+                    echo "====="
+                    ${pkgs.colcon}/bin/colcon build --symlink-install
+                    cd ..
+                    echo -e "Done generating build artifacts and symlinks for ROS."
+
+                    echo -e "\e[1mDone installing.\e[0m"
+                    echo -e "\e[1mUse \`. run.sh module_name node.py\` to build your first node.\e[0m"
+                    EOF
+
+                    install -Dm755 build.sh $out/bin/arcturus-builder
+
+                    makeWrapper "$out/bin/arcturus-builder" "$out/bin/arcturus-builder-wrapped" \
+                      --prefix PATH : "$out/bin" \
+                      --prefix LD_LIBRARY_PATH : "$out/lib:${pkgs.lib.makeLibraryPath [ pkgs.openssl.out ]}" \
+                      --prefix PYTHONPATH : "$out/${pkgs.python.sitePackages}" \
+                      --prefix CMAKE_PREFIX_PATH : "$out" \
+                      --prefix AMENT_PREFIX_PATH : "$out" \
+                      --prefix ROS_PACKAGE_PATH : "$out/share" \
+                      --prefix GZ_CONFIG_PATH : "$out/share/gz" \
+                      --set ROS_DISTRO '${ros-environment.rosDistro}' \
+                      --set ROS_VERSION '${toString ros-environment.rosVersion}' \
+                      --set ROS_PYTHON_VERSION '${lib.versions.major python.version}' \
+                      ''${rosWrapperArgs[@]}
+                  '';
+              })
+          );
         };
       }
     );
