@@ -140,8 +140,12 @@
 
         formatter = pkgs.nixfmt-rfc-style;
 
-        packages = {
-          default = pkgs.callPackage ./bin {
+        packages = rec {
+          default = pkgs.symlinkJoin {
+            name = "arcturus-tools";
+            paths = [ arcturus-scripts ];
+          };
+          arcturus-scripts = pkgs.callPackage ./bin {
             inherit arcturus-tree ros2-keyboard;
             inherit (ros2nix.packages.${pkgs.stdenv.targetPlatform.system}) ros2nix;
             rev = if (self ? rev) then self.rev else "unstable";
